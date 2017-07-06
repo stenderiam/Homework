@@ -28,7 +28,7 @@ const Autocomplete = {
                         newData[v].indexOf(value);
                         //bold substring in the sort array
                         if (subStartAt > -1) {
-                            let subEnd = newData[v].indexOf(value) + value.length;
+                            let subEnd = subStartAt + value.length;
                             let start = newData[v].slice(0, subStartAt);
                             let middle = newData[v].slice(subStartAt, subEnd);
                             let end = newData[v].slice(subEnd, newData[v].lenght);
@@ -153,5 +153,4 @@ const Autocomplete = {
 
 
  
-
 
