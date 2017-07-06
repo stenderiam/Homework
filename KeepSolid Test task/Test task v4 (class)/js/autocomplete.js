@@ -1,12 +1,15 @@
+    
 class Autocomplete {
         
-        constructor() {
-            this.data = {};
-            this.input = null;
-            this.results = null;
+        constructor(data, inputId) {
+            this.data = data;
+            this.input = document.getElementById(inputId);;
+            this.input.insertAdjacentHTML('afterend', '<div id="results'+inputId+'" class="results" ></div>');
+            this.results = document.getElementById('results'+inputId);
+            this.init();
         }
 
-        // Method to generate an array of "lines" (strings) which contains a list of countries 
+        //method to generate an array of "lines" (strings) which contains a list of countries 
         generateArray() {
             const data = this.data;
             const input = this.input;
@@ -15,9 +18,10 @@ class Autocomplete {
             let newData = data;
             let backupData = newData;
             const lines = [];
-            // Sort an array of lines relative to the entered values (substring)
+            //sort an array of lines relative to the entered values (substring)
             if (value) {
-                // Get list of countries from data object
+                //get list of countries from data object
+                newData = JSON.parse(JSON.stringify(data));
                 backupData = [];
                 let temporaryArray = [];
                 Object.keys(newData)
@@ -37,12 +41,12 @@ class Autocomplete {
                             temporaryArray.push(joined);
                         }
                     });
-                // Show first five lines
+                //show first five lines
                 backupData = backupData.slice(0, 5);
                 newData = temporaryArray.slice(0, 5);
 
             }
-            // In case if there's no matches make input outline red with notification
+            //in case if there's no matches make input outline red with notification
             if (Object.keys(newData).length == 0) {
                 var match = "no matches";
                 results.innerHTML = '<div class="results__line">' + match + '</div>';
@@ -50,7 +54,7 @@ class Autocomplete {
                     input.classList.add("onFocus");
                 }
             } else {
-                // In case of matches with input value, print them or show the whole list
+                //in case of matches with input value, print them or show the whole list
                 Object.keys(newData)
                     .sort()
                     .forEach(v => {
@@ -62,19 +66,13 @@ class Autocomplete {
                 }
             }
         }
-        // Fix scroll for key press events
+        //fix scroll for key press events
         fixScroll(elem) {
             const currentScrollTop = elem.getBoundingClientRect().top - this.results.getBoundingClientRect().top;
             this.results.scrollTop = currentScrollTop + this.results.scrollTop - 100;
         }
-        // Initialization function of events
-        init(data, inputId) {
-            this.data = data;
-            this.input = document.getElementById(inputId);
-            this.input.insertAdjacentHTML('afterend', '<div id="results'+inputId+'" class="results" ></div>');
-            this.results = document.getElementById('results'+inputId);
-  
-         
+        //Initialization function of events
+        init() {
             this.input.addEventListener("focus", () => {
                 if (this.results.classList) {
                     this.results.classList.add("results--visability");
@@ -82,8 +80,6 @@ class Autocomplete {
                 }
 
             });
-
-
             this.input.addEventListener("keyup", (event) => {
                 if (event.which !== 40 && event.which !== 38 && event.which !== 13) {
                     this.generateArray();
@@ -136,16 +132,14 @@ class Autocomplete {
                     }
                 }
             });
-
-            
-            // On click event to get value on click for alert and input
+            //on click event to get value on click for alert and input
             this.results.addEventListener('click', (event) => {
                 var current = event.target;
                 //while is true in case it doesnt have a line and it isn't a tag of the body 
                 while (current.tagName.toLowerCase() !== 'body' && !current.classList.contains("results__line")) {
                     current = current.parentNode;
                 }
-                // Gets a data-value of the current (clicked) line
+                //gets a data-value of the current (clicked) line
                 var text = current.getAttribute("data-value");
                 if (text) {
                     this.input.value = text
@@ -154,3 +148,4 @@ class Autocomplete {
             });
         }
     };
+
