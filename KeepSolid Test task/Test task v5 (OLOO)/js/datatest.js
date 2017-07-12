@@ -1,1 +1,0 @@
-const dataTest = '{"BD": "Bangladesh", "BE": "Belgium", "BF": "Burkina Faso"}'
