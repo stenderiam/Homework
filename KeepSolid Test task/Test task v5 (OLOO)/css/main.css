@@ -1,0 +1,56 @@
+.results {
+    height: 200px;
+    width: 210px;
+    border: 1px solid gray;
+    margin-top: 15px;
+    overflow: auto;
+    padding: 20px;
+    display: none;
+}
+
+.results--visability {
+    display: block;
+}
+.results--invisible {
+    display: none;
+}
+
+.onFocus {
+    border-color: red;
+}
+ 
+.results__line {
+    padding: 6px 4px;
+    margin: 5px 0;
+    border-bottom: 1px solid rgba(158, 158, 158, 0.39);
+}
+
+.results__line:hover {
+    cursor: pointer;
+}
+
+.results__line--selected {
+    background: yellow;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+}
+.container--test {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+}
+
+.myInput {
+    width: 250px;
+    padding: 20px;
+    font-size: 18px;
+    outline: none;
+}
+
+.bold {
+    font-weight: 800;
+}
