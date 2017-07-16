@@ -32,6 +32,7 @@ export default class Chips extends Autocomplete {
     }
 
     // filter to push unique chips into array
+    
     filterChipArray() {
         let obj = {};
         for (let i = 0; i < this.chipsArray.length; i++) {
@@ -39,7 +40,6 @@ export default class Chips extends Autocomplete {
             obj[str] = true;
         }
 
-        // more efficient is way to use objects
         return Object.keys(obj);
     }
 
